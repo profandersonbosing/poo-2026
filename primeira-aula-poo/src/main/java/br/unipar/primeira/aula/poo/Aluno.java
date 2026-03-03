@@ -10,7 +10,7 @@ package br.unipar.primeira.aula.poo;
  */
 public class Aluno {
     
-    String nome;
+    protected String nome;
     
     String ra;
     

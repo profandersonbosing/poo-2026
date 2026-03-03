@@ -4,6 +4,11 @@
 
 package br.unipar.primeira.aula.poo;
 
+import br.unipar.primeira.aula.poo.model.Professor;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author andersonbosing
@@ -18,7 +23,7 @@ public class PrimeiraAulaPoo {
         aluno.idade = 32;
         aluno.telefone = "(45) 98908908";
         
-        Aluno aluno2 = null; //instanciando outro objeto
+        Aluno aluno2 = new Aluno(); //instanciando outro objeto
         aluno2.cpf = "578293847598723894";
         aluno2.idade = 11;
         aluno2.ra = "4324234234";
@@ -26,6 +31,16 @@ public class PrimeiraAulaPoo {
         
         System.out.println("Nome do aluno é " + aluno.nome);
         System.out.println("Nome do aluno é " + aluno2.nome);
+        
+        
+        String result = JOptionPane.showInputDialog("Informe o nome:");
+        
+        Professor professor = new Professor();
+        professor.setNome(result);
+        
+        
+        JOptionPane.showMessageDialog(null, "Nome do professor é " + professor.getNome());
+        
         
         
     }
