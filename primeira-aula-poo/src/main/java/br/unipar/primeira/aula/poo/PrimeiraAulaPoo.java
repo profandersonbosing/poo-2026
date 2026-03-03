@@ -34,9 +34,11 @@ public class PrimeiraAulaPoo {
         
         
         String result = JOptionPane.showInputDialog("Informe o nome:");
+        String idade = JOptionPane.showInputDialog("Informe o Idade:");
         
         Professor professor = new Professor();
         professor.setNome(result);
+        professor.setIdade(Integer.valueOf(idade));
         
         
         JOptionPane.showMessageDialog(null, "Nome do professor é " + professor.getNome());
