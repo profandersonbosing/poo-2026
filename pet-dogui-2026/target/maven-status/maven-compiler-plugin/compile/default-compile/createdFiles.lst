@@ -1,0 +1,4 @@
+br/unipar/pet/dogui/domains/Especie.class
+br/unipar/pet/dogui/Main.class
+br/unipar/pet/dogui/domains/BaseEntity.class
+br/unipar/pet/dogui/enums/StatusEnum.class
