@@ -2,3 +2,7 @@
 /Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/domains/BaseEntity.java
 /Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/domains/Especie.java
 /Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/enums/StatusEnum.java
+/Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/exceptions/ValidacaoNegocioException.java
+/Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/repositories/EspecieRepository.java
+/Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/repositories/interfaces/EspecieRepositoryInterface.java
+/Users/andersonbosing/NetBeansProjects/pet-dogui-2026/src/main/java/br/unipar/pet/dogui/services/EspecieService.java

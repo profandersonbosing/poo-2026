@@ -1,4 +1,8 @@
 br/unipar/pet/dogui/domains/Especie.class
 br/unipar/pet/dogui/Main.class
+br/unipar/pet/dogui/services/EspecieService.class
 br/unipar/pet/dogui/domains/BaseEntity.class
+br/unipar/pet/dogui/repositories/EspecieRepository.class
+br/unipar/pet/dogui/repositories/interfaces/EspecieRepositoryInterface.class
+br/unipar/pet/dogui/exceptions/ValidacaoNegocioException.class
 br/unipar/pet/dogui/enums/StatusEnum.class
