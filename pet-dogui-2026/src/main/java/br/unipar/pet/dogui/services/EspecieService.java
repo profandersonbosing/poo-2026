@@ -64,7 +64,7 @@ public class EspecieService {
        
         Especie especieValidacao = especieRepositoryInterface.findById(especie.getId());
 
-        if (especie == null) {
+        if (especieValidacao == null) {
             throw new NaoEncontradoException("Especie não encontrada para o ID informado");
         }
 
@@ -85,10 +85,16 @@ public class EspecieService {
         return especie;
     }
 
-    public void deletar(Long id) throws ValidacaoNegocioException {
+    public void deletar(Long id) throws ValidacaoNegocioException, NaoEncontradoException {
 
         if (id == null) {
             throw new ValidacaoNegocioException("Obrigatório informar o ID da Especie para exclusão");
+        }
+        
+        Especie especieValidacao = especieRepositoryInterface.findById(id);
+
+        if (especieValidacao == null) {
+            throw new NaoEncontradoException("Especie não encontrada para o ID informado");
         }
 
         especieRepositoryInterface.deletar(id);
