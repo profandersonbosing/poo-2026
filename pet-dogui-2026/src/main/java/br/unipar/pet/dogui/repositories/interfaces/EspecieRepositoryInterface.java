@@ -5,6 +5,7 @@
 package br.unipar.pet.dogui.repositories.interfaces;
 
 import br.unipar.pet.dogui.domains.Especie;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -13,14 +14,14 @@ import java.util.ArrayList;
  */
 public interface EspecieRepositoryInterface {
     
-    public Especie inserir(Especie especie);
+    public Especie inserir(Especie especie) throws SQLException;
     
-    public Especie atualizar(Especie especie);
+    public Especie atualizar(Especie especie) throws SQLException;
     
-    public void deletar(Long id);
+    public void deletar(Long id) throws SQLException;
     
-    public Especie findById(Long id);
+    public Especie findById(Long id) throws SQLException;
     
-    public ArrayList<Especie> listarTodos();
+    public ArrayList<Especie> listarTodos() throws SQLException;
     
 }

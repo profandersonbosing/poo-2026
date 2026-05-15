@@ -5,10 +5,14 @@
 package br.unipar.pet.dogui.services;
 
 import br.unipar.pet.dogui.domains.Especie;
+
 import br.unipar.pet.dogui.exceptions.NaoEncontradoException;
 import br.unipar.pet.dogui.exceptions.ValidacaoNegocioException;
+
 import br.unipar.pet.dogui.repositories.EspecieRepository;
 import br.unipar.pet.dogui.repositories.interfaces.EspecieRepositoryInterface;
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 /**
@@ -23,7 +27,7 @@ public class EspecieService {
         this.especieRepositoryInterface = new EspecieRepository();
     }
     
-    public Especie inserir(Especie especie) throws ValidacaoNegocioException {
+    public Especie inserir(Especie especie) throws ValidacaoNegocioException, SQLException {
         
         if (especie == null) {
             throw new ValidacaoNegocioException("Obrigatório informar a Especie para inserção");
@@ -52,7 +56,7 @@ public class EspecieService {
         return especie;
     }
     
-    public Especie atualizar(Especie especie) throws ValidacaoNegocioException, NaoEncontradoException {
+    public Especie atualizar(Especie especie) throws ValidacaoNegocioException, NaoEncontradoException, SQLException {
 
         if (especie == null) {
             throw new ValidacaoNegocioException("Obrigatório informar a Especie para atualização");
@@ -85,7 +89,7 @@ public class EspecieService {
         return especie;
     }
 
-    public void deletar(Long id) throws ValidacaoNegocioException, NaoEncontradoException {
+    public void deletar(Long id) throws ValidacaoNegocioException, NaoEncontradoException, SQLException {
 
         if (id == null) {
             throw new ValidacaoNegocioException("Obrigatório informar o ID da Especie para exclusão");
@@ -100,7 +104,7 @@ public class EspecieService {
         especieRepositoryInterface.deletar(id);
     }
 
-    public Especie findById(Long id) throws ValidacaoNegocioException, NaoEncontradoException {
+    public Especie findById(Long id) throws ValidacaoNegocioException, NaoEncontradoException, SQLException {
 
         if (id == null) {
             throw new ValidacaoNegocioException("Obrigatório informar o ID da Especie para busca");
@@ -115,7 +119,7 @@ public class EspecieService {
         return especie;
     }
 
-    public ArrayList<Especie> listarTodos() {
+    public ArrayList<Especie> listarTodos() throws SQLException {
         return especieRepositoryInterface.listarTodos();
     }
 

@@ -7,6 +7,7 @@ package br.unipar.pet.dogui;
 import br.unipar.pet.dogui.domains.Especie;
 import br.unipar.pet.dogui.enums.StatusEnum;
 import br.unipar.pet.dogui.exceptions.ValidacaoNegocioException;
+import br.unipar.pet.dogui.infraestructure.ConnectionFactory;
 import br.unipar.pet.dogui.repositories.EspecieRepository;
 import br.unipar.pet.dogui.repositories.interfaces.EspecieRepositoryInterface;
 import br.unipar.pet.dogui.services.EspecieService;
@@ -26,16 +27,14 @@ public class Main {
             Especie especie1 = new Especie();
             especie1.setStatus(StatusEnum.ATIVO);
             especie1.setDeletado(Boolean.FALSE);
-            especie1.setNome("Cachorro");
+            especie1.setNome("Ave");
             especie1.setDtCriacao(new Date());
             especie1.setDtAtualizacao(new Date());
             
             EspecieService especieService = new EspecieService();
             especieService.inserir(especie1);
 
-        } catch (ValidacaoNegocioException validacaoNegocioException) {
-            JOptionPane.showMessageDialog(null, validacaoNegocioException.getMessage());
-        }  catch(Exception exception) {
+        } catch(Exception exception) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao executar o sistema:"+
                     exception.getMessage());
         }finally {
