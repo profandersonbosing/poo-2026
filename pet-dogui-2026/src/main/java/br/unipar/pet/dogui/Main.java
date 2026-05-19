@@ -33,6 +33,16 @@ public class Main {
             
             EspecieService especieService = new EspecieService();
             especieService.inserir(especie1);
+            
+            ArrayList<Especie> listaRetorno = especieService.listarTodos();
+            System.out.println("Retorno do listar Todos "+ listaRetorno.toString());
+            
+            Especie retornoFind = especieService.findById(1L);
+            
+            retornoFind.setNome("2026");
+            especieService.atualizar(retornoFind);
+            
+            especieService.deletar(3L);
 
         } catch(Exception exception) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao executar o sistema:"+

@@ -5,6 +5,7 @@
 package br.unipar.pet.dogui.repositories;
 
 import br.unipar.pet.dogui.domains.Especie;
+import br.unipar.pet.dogui.enums.StatusEnum;
 import br.unipar.pet.dogui.infraestructure.ConnectionFactory;
 import br.unipar.pet.dogui.repositories.interfaces.EspecieRepositoryInterface;
 import java.sql.Connection;
@@ -23,15 +24,22 @@ public class EspecieRepository implements EspecieRepositoryInterface {
     
     private static final String INSERT = 
             "INSERT INTO especie (nome, status, deletado, dt_criacao, dt_atualizacao) "
-            + "VALUES (?, ?, ?, ?, ?);  ";
+            + "VALUES (?, ?, ?, ?, ?);";
     
-    private static final String UPDATE = "";
+    private static final String UPDATE = 
+            "UPDATE especie SET nome = ?, deletado = ?, status = ?, "
+            + "dt_atualizacao = ? WHERE id = ?;";
     
-    private static final String DELETE = "";
+    private static final String DELETE = 
+            "DELETE FROM especie WHERE id = ?;";
     
-    private static final String FIND_BY_ID = "";
+    private static final String FIND_BY_ID = 
+            "SELECT id, nome, status, deletado, dt_criacao, "
+            + " dt_atualizacao FROM especie WHERE id = ?;";
     
-    private static final String FIND_ALL = "";
+    private static final String FIND_ALL = 
+            "SELECT id, nome, status, deletado, dt_criacao, dt_atualizacao "
+            + "FROM especie ORDER BY nome; ";
                                          
                                          
 
@@ -76,22 +84,128 @@ public class EspecieRepository implements EspecieRepositoryInterface {
 
     @Override
     public Especie atualizar(Especie especie) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            
+            conn = new ConnectionFactory().getConnection();
+            
+            pstm = conn.prepareStatement(UPDATE);
+            
+            pstm.setString(1, especie.getNome());
+            pstm.setBoolean(2, especie.getDeletado());
+            pstm.setString(3, especie.getStatus().toString());
+            pstm.setDate(4, new java.sql.Date(especie.getDtAtualizacao().getTime()));
+            pstm.setLong(5, especie.getId());
+            
+            pstm.executeUpdate();
+            
+            
+        } finally {
+            if (pstm != null) pstm.close();
+            if (conn != null) conn.close();
+        }
+        
+        return especie;
+    
     }
 
     @Override
     public void deletar(Long id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            
+            conn = new ConnectionFactory().getConnection();
+            
+            pstm = conn.prepareStatement(DELETE);
+            pstm.setLong(1, id);
+            
+            pstm.executeUpdate();
+            
+        } finally {
+            if (pstm != null) pstm.close();
+            if (conn != null) conn.close();
+        }
+    
     }
 
     @Override
     public Especie findById(Long id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Especie especie = null;
+        
+        try {
+            
+            conn = new ConnectionFactory().getConnection();
+            pstm = conn.prepareStatement(FIND_BY_ID);
+            pstm.setLong(1, id);
+            
+            rs = pstm.executeQuery();
+            
+            if (rs.next()) {
+                especie = new Especie();
+                especie.setId(rs.getLong("id"));
+                especie.setNome(rs.getString("nome"));
+                especie.setDeletado(rs.getBoolean("deletado"));
+                especie.setStatus(StatusEnum.valueOf(rs.getString("status")));
+                especie.setDtCriacao(rs.getDate("dt_criacao"));
+                especie.setDtAtualizacao(rs.getDate("dt_atualizacao"));
+            }
+            
+        } finally {
+            if (rs != null) rs.close();
+            if (pstm != null) pstm.close();
+            if (conn != null) conn.close();
+        }
+        
+        return especie;
+    
     }
 
     @Override
     public ArrayList<Especie> listarTodos() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Especie> listaEspecies = new ArrayList<>();
+        
+        try {
+            
+            conn = new ConnectionFactory().getConnection();
+            
+            pstm = conn.prepareStatement(FIND_ALL);
+            
+            rs = pstm.executeQuery();
+            
+            while (rs.next()) {
+                Especie especie = new Especie();
+                especie.setId(rs.getLong("id"));
+                especie.setNome(rs.getString("nome"));
+                especie.setDeletado(rs.getBoolean("deletado"));
+                especie.setStatus(StatusEnum.valueOf(rs.getString("status")));
+                especie.setDtCriacao(rs.getDate("dt_criacao"));
+                especie.setDtAtualizacao(rs.getDate("dt_atualizacao"));
+                
+                listaEspecies.add(especie);
+            }
+            
+        } finally {
+            if (rs != null) rs.close();
+            if (pstm != null) pstm.close();
+            if (conn != null) conn.close();
+        }
+        
+        return listaEspecies;
+    
     }
     
 }
